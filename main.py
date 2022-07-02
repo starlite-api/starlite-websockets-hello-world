@@ -14,13 +14,13 @@ async def echo_websocket_handler(socket: WebSocket) -> None:
 
     while True:
         try:
-            data = await socket.receive_json()
+            data = await socket.receive_text()
         except StarletteWebsockets.WebSocketDisconnect:
             print(f"Websocket {socket.user} Disconnected")
             break
-        await socket.send_json(data)
+        await socket.send_text(data)
 
     await socket.close()
 
 
-app = Starlite(route_handlers=[hello_world])
+app = Starlite(route_handlers=[hello_world, echo_websocket_handler])
