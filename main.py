@@ -1,6 +1,6 @@
 from typing import Any
-from starlette import websockets as StarletteWebsockets
-from starlite import Starlite, get, WebSocket, websocket
+from starlite import Starlite, WebSocket, get, websocket
+from starlette import websockets as starlette_websockets
 
 
 @get("/")
@@ -15,12 +15,10 @@ async def echo_websocket_handler(socket: WebSocket) -> None:
     while True:
         try:
             data = await socket.receive_text()
-        except StarletteWebsockets.WebSocketDisconnect:
-            print(f"Websocket {socket.user} Disconnected")
-            break
+        except starlette_websockets.WebSocketDisconnect:
+            print("Websocket Disconnected")
+            return
         await socket.send_text(data)
-
-    await socket.close()
 
 
 app = Starlite(route_handlers=[hello_world, echo_websocket_handler])
