@@ -3,17 +3,16 @@ Minimal Starlite websockets implementation.
 """
 
 from starlette import websockets as starlette_websockets
-from starlite import Response, Starlite, WebSocket, get, websocket
+from starlite import Starlite, WebSocket, get, websocket
 from starlite.enums import MediaType
 
 
-@get("/")
-def web_socket_testing() -> Response:
+@get("/", media_type=MediaType.HTML)
+def web_socket_testing() -> str:
     """
     Minimal functional example.
     """
-    return Response(
-        content="""<html>
+    return """<html>
   <head>
     <title>Web Socket Testing</title>
   </head>
@@ -46,10 +45,7 @@ socket.addEventListener('message', function (event) {
 });
   </script>
 </html>
-""",
-        status_code=200,
-        media_type=MediaType.HTML,
-    )
+"""
 
 
 @websocket(path="/echo")
