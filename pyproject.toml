@@ -11,9 +11,9 @@ uvicorn = {extras = ["standard"], version = "^0.18"}
 
 [tool.poetry.dev-dependencies]
 black = "*"
-mypy = "^0.961"
-pre-commit = "^2.19.0"
-pylint = "^2.14.4"
+mypy = "*"
+pre-commit = "*"
+pylint = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
