@@ -1,10 +1,14 @@
 """
 Minimal Starlite websockets implementation.
 """
+import logging
 
-from starlette import websockets as starlette_websockets
-from starlite import Starlite, WebSocket, get, websocket
+from pydantic import BaseModel
+from starlite import Starlite, get
 from starlite.enums import MediaType
+from starlite.handlers import ws_message
+
+logger = logging.getLogger("uvicorn.error")
 
 
 @get("/", media_type=MediaType.HTML)
@@ -35,32 +39,32 @@ function sendMessage(message) {
 
 document.getElementById("echo-input").addEventListener("keyup", event => {
     if(event.key !== "Enter") return;
-    sendMessage(event.target.value);
+    sendMessage(JSON.stringify({data: event.target.value}));
     event.preventDefault();
 });
 
 // Listen for messages
 socket.addEventListener('message', function (event) {
-    document.getElementById("echo-response").value = event.data;
+    console.log(event);
+    document.getElementById("echo-response").value = JSON.parse(event.data).data;
 });
   </script>
 </html>
 """
 
 
-@websocket(path="/echo")
-async def echo_websocket_handler(socket: WebSocket) -> None:
-    """
-    Receive and return text messages via `socket`.
-    """
-    await socket.accept()
+class Data(BaseModel):
+    """Model for websocket in/out"""
 
-    while True:
-        try:
-            data = await socket.receive_text()
-        except starlette_websockets.WebSocketDisconnect:
-            return
-        await socket.send_text(data)
+    data: str
+
+
+@ws_message(path="/echo")
+async def echo_websocket_handler(data: Data) -> Data:
+    """
+    Echo the payload.
+    """
+    return data
 
 
 app = Starlite(route_handlers=[web_socket_testing, echo_websocket_handler])
