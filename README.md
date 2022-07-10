@@ -1,14 +1,14 @@
 <img alt="Starlite logo" src="./static/starlite-banner.svg" width="100%" height="auto">
 
-# starlite-hello-world
+# starlite-websockets-hello-world
 
-Minimum Starlite API Implementation.
+Minimum Starlite WebSocket Implementation.
 
 `$ poetry install`
 
 `$ poetry run uvicorn main:app --reload`
 
-Browse to:
+Navigate to:
 
 `localhost:8000/`
 
