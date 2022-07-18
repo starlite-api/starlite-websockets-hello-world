@@ -6,7 +6,7 @@ import logging
 from pydantic import BaseModel
 from starlite import Starlite, get
 from starlite.enums import MediaType
-from starlite.handlers import ws_message
+from starlite.handlers import wsmessage
 
 logger = logging.getLogger("uvicorn.error")
 
@@ -59,7 +59,7 @@ class Data(BaseModel):
     data: str
 
 
-@ws_message(path="/echo")
+@wsmessage(path="/echo")
 async def echo_websocket_handler(data: Data) -> Data:
     """
     Echo the payload.

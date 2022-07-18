@@ -411,6 +411,7 @@ description = "Light-weight and flexible ASGI API Framework"
 category = "main"
 optional = false
 python-versions = ">=3.7,<4.0"
+develop = false
 
 [package.dependencies]
 openapi-schema-pydantic = "*"
@@ -425,6 +426,12 @@ typing-extensions = "*"
 [package.extras]
 testing = ["requests", "brotli"]
 brotli = ["brotli"]
+
+[package.source]
+type = "git"
+url = "https://github.com/peterschutt/starlite.git"
+reference = "wrapped-websocket-handler"
+resolved_reference = "429bf83077a5e22cb2d5d3fa693edb606dcd3c71"
 
 [[package]]
 name = "toml"
@@ -541,7 +548,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "009db707f9003e50c3ad7d8ad19cf47719870a10adbb8d6fa147cf5e331bbaf7"
+content-hash = "1c51f1c76a26267ecaf5aa092bf810d6e24c9e9fc391fe68e920136de2897f52"
 
 [metadata.files]
 anyio = [
@@ -888,10 +895,7 @@ starlette = [
     {file = "starlette-0.20.4-py3-none-any.whl", hash = "sha256:c0414d5a56297d37f3db96a84034d61ce29889b9eaccf65eb98a0b39441fcaa3"},
     {file = "starlette-0.20.4.tar.gz", hash = "sha256:42fcf3122f998fefce3e2c5ad7e5edbf0f02cf685d646a83a08d404726af5084"},
 ]
-starlite = [
-    {file = "starlite-1.6.1-py3-none-any.whl", hash = "sha256:8a20c15289ba59ecaee7406f3be146003f3a0cc08f145eac35f252ddee61cb6d"},
-    {file = "starlite-1.6.1.tar.gz", hash = "sha256:d18a3c41bf47af91e4b6e48b2982e030ffaf216c320010845e7ba34146888218"},
-]
+starlite = []
 toml = [
     {file = "toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},
     {file = "toml-0.10.2.tar.gz", hash = "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"},
